@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0%;
+            padding: 0%;
+        }
+
+        html,
+        body {
+            background-image: linear-gradient(to right, #1546a4, #23449f, #2c4399, #324194, #37408f, #4c3c87, #5a387e, #653475, #752f64, #7e2d53, #803144, #7e3737);
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            text-align: center;
+            letter-spacing: 1px;
+            color: white;
+            padding: 2% 0%;
+        }
+
+        h3 {
+            border-bottom: 2.5px solid rgba(255, 255, 255, 0.767);
+            margin-bottom: 7%;
+            margin: auto auto 3% auto;
+            color: white;
+            letter-spacing: 1px;
+            font-size: 1.5em;
+            width: fit-content;
+            width: -moz-fit-content;
+            text-align: center;
+        }
+
+        form {
+            align-self: center;
+            background-color: rgba(255, 255, 255, 0.11);
+            border: 2px solid rgba(255, 255, 255, 0.452);
+            padding: 1% 2% 2% 2%;
+            width: 35%;
+            min-width: 450px;
+            max-width: 520px;
+            height: 65vh;
+            margin: auto auto;
+            border-radius: 6px;
+        }
+
+        .reviewinput {
+            height: 10em;
+            box-shadow: none;
+        }
+
+        form p {
+            display: block;
+            color: rgba(255, 255, 255, 0.863);
+            margin-top: 0.5em;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        form input {
+            margin: 0.5em auto;
+            margin-bottom: 0.5em;
+            width: 100%;
+            outline: none;
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.589);
+            color: rgba(255, 255, 255, 0.822);
+            height: 2.2em;
+            padding-left: 10px;
+            padding-right: 10px;
+            letter-spacing: 1px;
+            border-radius: 3px;
+        }
+
+        form textarea {
+            margin: 0.5em auto;
+            width: 100%;
+            outline: none;
+            background-color: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.589);
+            color: white;
+            padding: 10px;
+            letter-spacing: 1px;
+            resize: none;
+            overflow: auto;
+            word-wrap: break-word;
+            border-radius: 3px;
+        }
+
+        .submit-btn {
+            width: 30%;
+            margin: 2% 35%;
+            height: 2.5em;
+            cursor: pointer;
+            text-transform: capitalize;
+            font-weight: 600;
+        }
+
+        .submit-btn:hover {
+            background-color: rgba(255, 255, 255, 0.61);
+            transition: all 0.25s ease-in-out;
+            color: black;
+            border-radius: 3px;
+        }
+        form span{
+            color: rgb(235, 76, 76);
+        }
+
+        .review-container {
+            width: 96%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 4% auto;
+            height: auto;
+        }
+
+        .subcontainers {
+            width: 24%;
+            margin: 2% auto;
+            min-width: 300px;
+            max-width: 380px;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.705);
+            background-color: rgba(0, 0, 0, 0.123);
+            border-radius: 5px;
+            box-shadow: 0px 4px 8px rgb(235, 108, 108);
+            transition: all 0.25s ease-in-out;
+            min-height: 25vh;
+        }
+
+        .subcontainers:hover {
+            box-shadow: 0px 8px 16px rgb(64, 140, 255);
+        }
+
+        .review-box {
+            padding: 10px;
+            word-wrap: break-word;
+        }
+
+        .review-box h4 {
+
+            text-align: center;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            margin: 5px auto 10px auto;
+        }
+
+        .review-box p {
+            font-size: 0.9em;
+            line-height: 1.5em;
+            letter-spacing: 0.5px;
+            text-align: justify;
+        }
+
+        .review-box h5 {
+            text-align: right;
+            text-transform: capitalize;
+            margin-top: 5px;
+        }
+        .footer{
+            padding-top: 1.5vh;
+            height: 6vh;
+            text-align: center;
+            background-color: rgba(19, 19, 19, 0.205);
+            color: white;
+            font-weight: 400;
+        }
+        .footer a{
+            text-decoration: none;
+            color: white;
+            margin-left: 1%;
+            font-weight: 700;
+        }
+    </style>
+
+    <title>review hub</title>
+
+</head>
+
+<body>
+    <h1>Review Hub </h1>
+    <div class="container">
+        <form action="http://localhost:5000/" method="post">
+            <h3>Your Review</h3>
+
+            <div class="form-input">
+                <p>{{ form.name.label }}</p> {{ form.name }}
+            </div>
+            <div class="form-input">
+                <p>{{ form.product.label }}</p> {{ form.product }}
+            </div>
+            <div class="form-input">
+                <p>{{ form.review.label }}</p> {{ form.review(class="reviewinput") }}
+            </div>
+            <p><input type="submit" value="submit" class="submit-btn" /></p>
+            <span>{{ datavalid }}</span>
+        </form>
+        <div class="review-container">
+            {% for review in reviews %}
+            <div class="subcontainers">
+                <div class="review-box">
+                    <h4>
+                        {{ review.product }}
+                    </h4>
+                    <p> {{ review.review }}</p>
+
+                    <h5>By : {{ review.name }}</h5>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        </table>
+    </div>
+    <div class="footer">
+        <p>Developed By :<a href="mailto:785surya@gmail.com">Suryakant Chandrakar</a></p>
+    </div>
+</body>
+
+</html>
